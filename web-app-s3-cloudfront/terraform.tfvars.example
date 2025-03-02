@@ -1,0 +1,10 @@
+# Rename this file to terraform.tfvars and update the values
+
+# Required - must be globally unique across all AWS accounts
+bucket_name = "your-vue-app-bucket-name"
+
+# Optional - defaults to us-east-1
+aws_region = "us-east-1"
+
+# Optional - defaults to dev
+environment = "dev" 
