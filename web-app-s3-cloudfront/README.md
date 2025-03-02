@@ -1,10 +1,10 @@
-# Vue.js Application Hosting with AWS S3 and CloudFront
+# Client Side Application Hosting with AWS S3 and CloudFront
 
-This Terraform template sets up infrastructure to host a Vue.js application on AWS using S3 for storage and CloudFront for content delivery.
+This Terraform template sets up infrastructure to host a static web application on AWS using S3 for storage and CloudFront for content delivery.
 
 ## Architecture
 
-- **S3 Bucket**: Stores the static files of your Vue.js application
+- **S3 Bucket**: Stores the static files of your application
 - **CloudFront Distribution**: Serves the content with low latency globally
 - **Security**: S3 bucket is configured to block public access, only allowing CloudFront to access the content
 
@@ -12,7 +12,7 @@ This Terraform template sets up infrastructure to host a Vue.js application on A
 
 - [Terraform](https://www.terraform.io/downloads.html) (v1.2.0 or newer)
 - AWS CLI configured with appropriate credentials
-- Vue.js application built and ready for deployment (the `dist` directory)
+- Web application built and ready for deployment (the `dist` directory)
 
 ## Usage
 
@@ -39,8 +39,8 @@ This Terraform template sets up infrastructure to host a Vue.js application on A
    terraform apply
    ```
 
-5. **Upload Vue.js Application**:
-   After the infrastructure is created, upload your Vue.js application to the S3 bucket:
+5. **Upload Web App Dist Artifact**:
+   After the infrastructure is created, upload your static web application to the S3 bucket:
    ```bash
    aws s3 sync ./dist/ s3://your-unique-bucket-name/ --delete
    ```
@@ -57,8 +57,8 @@ terraform destroy
 
 ## Notes
 
-- The CloudFront distribution is configured to redirect all 403 and 404 errors to `index.html`, which is necessary for Single Page Applications (SPAs) like Vue.js.
+- The CloudFront distribution is configured to redirect all 403 and 404 errors to `index.html`, which is necessary for Single Page Applications (SPAs).
 - The S3 bucket is configured to block all public access, and only CloudFront can access its contents.
 - CloudFront is configured with a default TTL of 1 hour (3600 seconds).
-- A placeholder index.html file is created during the initial deployment to avoid CloudFront errors. This placeholder will be automatically replaced when you deploy your Vue.js application.
+- A placeholder index.html file is created during the initial deployment to avoid CloudFront errors. This placeholder will be automatically replaced when you deploy your application.
 - The configuration includes proper dependency management to ensure resources are created in the correct order. 
